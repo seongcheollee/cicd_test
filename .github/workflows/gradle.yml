@@ -41,10 +41,10 @@ jobs:
         arguments: build
     
 
-#    - name: Build with Gradle
-#      run: |
-#          chmod +x ./gradlew
-#          ./gradlew clean build -x test
+    - name: Build with Gradle
+      run: |
+          chmod +x ./gradlew
+          ./gradlew clean build -x test
 
 
     - name: Build MySQL 8.0 Docker Image
