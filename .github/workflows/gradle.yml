@@ -28,20 +28,20 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
-
-    - name: Setup MySQL
-      uses: samin/mysql-action@v1
-      with:
-        character set server: 'utf8'
-        mysql database: 'BBdb'
-        mysql user: 'root'
-        mysql password: 'root'
-
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
-      with:
-        arguments: build
-    
+#
+#    - name: Setup MySQL
+#      uses: samin/mysql-action@v1
+#      with:
+#        character set server: 'utf8'
+#        mysql database: 'BBdb'
+#        mysql user: 'root'
+#        mysql password: 'root'
+##
+#    - name: Build with Gradle
+#      uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
+#      with:
+#        arguments: build
+#
 
     - name: Build with Gradle
       run: |
