@@ -28,24 +28,23 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
+    - name: Make application.properties
+      run: |
+        cd ./src/main/resources
+        touch ./application.properties
+        echo "${{ secrets.PROPERTIES }}" > ./application.properties
+      shell: bash
 
     - name: Build with Gradle
       uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
       with:
         arguments: build
     
-#    - name: Make application.properties
+
+#    - name: Build with Gradle
 #      run: |
-#         cd ./src/main/resources
-#         touch ./application.properties
-#         echo "${{ secrets.PROPERTIES }}" > ./application.properties
-#      shell: bash
-   
-   # gradle을 통해 소스를 빌드.
-    - name: Build with Gradle
-      run: |
-          chmod +x ./gradlew
-          ./gradlew clean build -x test
+#          chmod +x ./gradlew
+#          ./gradlew clean build -x test
 
 
     - name: Build MySQL 8.0 Docker Image
