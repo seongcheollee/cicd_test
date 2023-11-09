@@ -47,10 +47,18 @@ jobs:
           chmod +x ./gradlew
           ./gradlew clean build -x test
 
-   # dockerfile을 통해 이미지를 빌드하고, 이를 docker repo로 push 합니다.
+
+    - name: Build MySQL 8.0 Docker Image
+      run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}        
+          docker build -f Docker/Mysql/Dockerfile -t yisc/mysql-8.0 .
+          docker push yisc/mysql-dev
+      
+
+      # dockerfile을 통해 이미지를 빌드하고, 이를 docker repo로 push 합니다.
    # 이 때 사용되는 ${{ secrets.DOCKER_REPO }}/directors-dev 가 위에서 만든 도커 repository 입니다.
     - name: Docker build & push to docker repo
       run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
-          docker build -f Docker/Springboot/Dockerfile -t yisc/directors-dev .
-          docker push yisc/directors-dev
+          docker build -f Docker/Springboot/Dockerfile -t yisc/springboot .
+          docker push yisc/springboot-dev
