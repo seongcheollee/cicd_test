@@ -52,7 +52,7 @@ jobs:
       run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}        
           docker build -f Docker/Mysql/Dockerfile -t yisc/mysql-8.0 .
-          docker push yisc/mysql-dev
+          docker push yisc/mysql-8.0
       
 
       # dockerfile을 통해 이미지를 빌드하고, 이를 docker repo로 push 합니다.
@@ -61,4 +61,4 @@ jobs:
       run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
           docker build -f Docker/Springboot/Dockerfile -t yisc/springboot .
-          docker push yisc/springboot-dev
+          docker push yisc/springboot
