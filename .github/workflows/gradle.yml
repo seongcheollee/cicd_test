@@ -28,11 +28,12 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
-    - name: Make application.properties
+        ## create application-database.yml
+    - name: make application-database.yml
       run: |
         cd ./src/main/resources
-        touch ./application.properties
-        echo "${{ secrets.PROPERTIES }}" > ./application.properties
+        touch ./application-database.yml
+        echo "${{ secrets.PROPERTIES }}" >> ./application-database.yml
       shell: bash
 
     - name: Build with Gradle
