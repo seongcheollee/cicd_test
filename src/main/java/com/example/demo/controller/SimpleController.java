@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.example.demo.controller;
 
 
 import org.slf4j.Logger;
