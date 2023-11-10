@@ -35,13 +35,8 @@ jobs:
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
           docker build -f Docker/Springboot/Dockerfile -t yisc/springboot .
           docker push yisc/springboot
+
       - name: Deploy to prod
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST_PROD }}
-          username: ubuntu
-          key: ${{ secrets.PRIVATE_KEY }}
-          envs: GITHUB_SHA
         run: |
           sudo docker rm -f $(docker ps -qa)
           sudo docker pull yisc/springboot
