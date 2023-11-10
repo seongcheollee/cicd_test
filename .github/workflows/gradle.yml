@@ -54,14 +54,6 @@ jobs:
           docker build -f Docker/Mysql/Dockerfile -t yisc/mysql-8.0 .
           docker push yisc/mysql-8.0
 
-
-    - name: Delete existing Docker image
-      run: |
-        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
-        docker stop demo 2   
-        docker rm demo 2     
-        docker rmi yisc/springboot     
-
     # 기존 Docker image 삭제하고 다시 Load
     - name: Docker build & push to docker repo
       run: |
@@ -70,16 +62,14 @@ jobs:
           docker push yisc/springboot
 
     - name: Deploy to prod
-      uses: appleboy/ssh-action@master
-      id: deploy-prod
-      if: contains(github.ref, 'main')
-      with:
-        host: ${{ secrets.HOST_PROD }}
-        username: ec2-user
-        key: ${{ secrets.PRIVATE_KEY }}
-        envs: GITHUB_SHA
-        script: |
-          sudo docker rm -f $(docker ps -qa)
-          sudo docker pull yisc/springboot
-          docker-compose up -d
-          docker image prune -f
+    uses: appleboy/ssh-action@master
+    with:
+      host: ${{ secrets.HOST_PROD }}
+      username: ubuntu
+      key: ${{ secrets.PRIVATE_KEY }}
+      envs: GITHUB_SHA
+      script: |
+        sudo docker rm -f $(docker ps -qa)
+        sudo docker pull yisc/springboot
+        docker-compose up -d
+        docker image prune -f
