@@ -44,9 +44,7 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           port: 22
           script: |
-            whoami
-
-#            sudo docker rm -f $(docker ps -qa)
-#            sudo docker pull yisc/springboot
-#            sudo docker-compose up -d
-#            sudo docker image prune -f
+            sudo docker rm -f $(docker ps -qa)
+            sudo docker pull yisc/springboot
+            sudo docker-compose up -d
+            sudo docker image prune -f
