@@ -61,8 +61,8 @@ jobs:
           docker build -f Docker/Springboot/Dockerfile -t yisc/springboot .
           docker push yisc/springboot
 
-    - uses: appleboy/ssh-action@master
     - name: Deploy to prod
+    - uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST_PROD }}
         username: ubuntu
