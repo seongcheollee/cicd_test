@@ -14,7 +14,7 @@ public class SimpleController {
     public String greeting(){
         logger.debug("SampleController's greeting method called");
 
-        return "sample!!";
+        return "sample!   ??!";
     }
 
 }
