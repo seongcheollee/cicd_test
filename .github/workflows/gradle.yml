@@ -61,15 +61,15 @@ jobs:
           docker build -f Docker/Springboot/Dockerfile -t yisc/springboot .
           docker push yisc/springboot
 
+    - uses: appleboy/ssh-action@master
     - name: Deploy to prod
-    uses: appleboy/ssh-action@master
-    with:
-      host: ${{ secrets.HOST_PROD }}
-      username: ubuntu
-      key: ${{ secrets.PRIVATE_KEY }}
-      envs: GITHUB_SHA
-      script: |
+      with:
+        host: ${{ secrets.HOST_PROD }}
+        username: ubuntu
+        key: ${{ secrets.PRIVATE_KEY }}
+        envs: GITHUB_SHA
+      run: |
         sudo docker rm -f $(docker ps -qa)
         sudo docker pull yisc/springboot
-        docker-compose up -d
-        docker image prune -f
+        sudo docker-compose up -d
+        sudo docker image prune -f
