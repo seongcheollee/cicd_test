@@ -10,6 +10,7 @@ services:
       - "8080:80"
     depends_on:
       - mysql
+    restart: on-failure
 
   mysql:
     image: yisc/mysql-8.0
@@ -19,4 +20,3 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: BBdb
-
